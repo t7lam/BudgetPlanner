@@ -6,18 +6,24 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct BudgetPlannerApp: App {
-    @State private var isLoggedIn: Bool = false
+    @StateObject private var appViewModel = AppViewModel()
+
+    init() {
+        FirebaseApp.configure()
+    }
     
     var body: some Scene {
         WindowGroup {
-            if isLoggedIn {
+            if appViewModel.isLoggedIn {
                 MainTabView()
             } else {
-                LoginScreen(isLoggedIn: $isLoggedIn)
+                LoginScreen()
             }
         }
+        .environmentObject(appViewModel)
     }
 }
