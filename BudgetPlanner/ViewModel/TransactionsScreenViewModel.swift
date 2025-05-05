@@ -13,7 +13,7 @@ class TransactionsScreenViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var showError: Bool = false
     
-    func addTransaction(amount: Double, category: String, typeOfTransaction: String, date: Date) async {
+    func addTransaction(amount: Double, category: String, typeOfTransaction: String, date: Date, description: String?) async {
         guard let userId = AuthManager.shared.currentUser?.uid else { return }
         
         let newTransaction = Transaction(
@@ -23,12 +23,15 @@ class TransactionsScreenViewModel: ObservableObject {
             amount: amount,
             category: category,
             type_of_transaction: typeOfTransaction,
-            description: nil,
+            description: description,
             created_at: Date()
         )
         
         do {
-            try await FirestoreManager.shared.addTransaction(transaction: newTransaction)
+            let docRef = try await FirestoreManager.shared.addTransaction(transaction: newTransaction)
+            // Update the transaction with the document ID
+            var updatedTransaction = newTransaction
+            updatedTransaction.id = docRef.documentID
             await fetchTransactions()
         } catch {
             errorMessage = error.localizedDescription

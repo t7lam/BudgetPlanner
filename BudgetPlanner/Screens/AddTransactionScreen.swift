@@ -64,7 +64,8 @@ struct AddTransactionScreen: View {
                                     amount: amountDouble,
                                     category: category,
                                     typeOfTransaction: typeOfTransaction,
-                                    date: date
+                                    date: date,
+                                    description: description.isEmpty ? nil : description
                                 )
                             }
                             dismiss()

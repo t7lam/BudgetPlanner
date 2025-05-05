@@ -36,8 +36,25 @@ class FirestoreManager {
     }
     
     // MARK: - Transaction Operations
-    func addTransaction(transaction: Transaction) async throws {
-        try await db.collection("transactions").addDocument(from: transaction)
+    func addTransaction(transaction: Transaction) async throws -> DocumentReference {
+        // Create a new document reference
+        let docRef = db.collection("transactions").document()
+        
+        // Create a dictionary with all transaction data including the id
+        let transactionData: [String: Any] = [
+            "id": docRef.documentID,
+            "user_id": transaction.user_id,
+            "date": transaction.date,
+            "amount": transaction.amount,
+            "category": transaction.category,
+            "type_of_transaction": transaction.type_of_transaction,
+            "description": transaction.description as Any,
+            "created_at": transaction.created_at
+        ]
+        
+        // Set the data with the document reference
+        try await docRef.setData(transactionData)
+        return docRef
     }
     
     func getTransactions(userId: String) async throws -> [Transaction] {
