@@ -25,7 +25,6 @@
 		13760C482DACA30E007AB6F2 /* TransactionsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C472DACA30E007AB6F2 /* TransactionsScreenViewModel.swift */; };
 		13760C4A2DB476B9007AB6F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13760C492DB476B9007AB6F2 /* GoogleService-Info.plist */; };
 		13760C4D2DB47B5C007AB6F2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 13760C4C2DB47B5C007AB6F2 /* FirebaseAuth */; };
-		13760C4F2DB47E73007AB6F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C4E2DB47E73007AB6F2 /* AppDelegate.swift */; };
 		13760C512DB48944007AB6F2 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C502DB48944007AB6F2 /* LoginScreenViewModel.swift */; };
 		13760C542DB56124007AB6F2 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C532DB56124007AB6F2 /* SignUpScreen.swift */; };
 		13760C562DB5620C007AB6F2 /* SignUpScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C552DB5620C007AB6F2 /* SignUpScreenViewModel.swift */; };
@@ -33,6 +32,7 @@
 		13760C5A2DB58016007AB6F2 /* AccountScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C592DB58016007AB6F2 /* AccountScreenViewModel.swift */; };
 		13760C5D2DB58445007AB6F2 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C5C2DB58445007AB6F2 /* AuthManager.swift */; };
 		13760C5F2DB584D0007AB6F2 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13760C5E2DB584D0007AB6F2 /* AppViewModel.swift */; };
+		13760C622DC85D3F007AB6F2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 13760C612DC85D3F007AB6F2 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,6 @@
 		13760C442DACA18E007AB6F2 /* AddTransactionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionScreen.swift; sourceTree = "<group>"; };
 		13760C472DACA30E007AB6F2 /* TransactionsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsScreenViewModel.swift; sourceTree = "<group>"; };
 		13760C492DB476B9007AB6F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		13760C4E2DB47E73007AB6F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13760C502DB48944007AB6F2 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
 		13760C532DB56124007AB6F2 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		13760C552DB5620C007AB6F2 /* SignUpScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewModel.swift; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13760C4D2DB47B5C007AB6F2 /* FirebaseAuth in Frameworks */,
+				13760C622DC85D3F007AB6F2 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +117,7 @@
 				134AB94B2DAC8B070074F462 /* BudgetPlannerTests */,
 				134AB9552DAC8B070074F462 /* BudgetPlannerUITests */,
 				134AB9392DAC8B060074F462 /* Products */,
+				13760C602DC85D3F007AB6F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,7 +145,6 @@
 				134AB93B2DAC8B060074F462 /* BudgetPlannerApp.swift */,
 				134AB93F2DAC8B060074F462 /* Assets.xcassets */,
 				134AB9412DAC8B060074F462 /* Preview Content */,
-				13760C4E2DB47E73007AB6F2 /* AppDelegate.swift */,
 			);
 			path = BudgetPlanner;
 			sourceTree = "<group>";
@@ -241,6 +241,13 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		13760C602DC85D3F007AB6F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +266,7 @@
 			name = BudgetPlanner;
 			packageProductDependencies = (
 				13760C4C2DB47B5C007AB6F2 /* FirebaseAuth */,
+				13760C612DC85D3F007AB6F2 /* FirebaseFirestore */,
 			);
 			productName = BudgetPlanner;
 			productReference = 134AB9382DAC8B060074F462 /* BudgetPlanner.app */;
@@ -381,7 +389,6 @@
 				13760C512DB48944007AB6F2 /* LoginScreenViewModel.swift in Sources */,
 				13760C5D2DB58445007AB6F2 /* AuthManager.swift in Sources */,
 				13760C5F2DB584D0007AB6F2 /* AppViewModel.swift in Sources */,
-				13760C4F2DB47E73007AB6F2 /* AppDelegate.swift in Sources */,
 				13760C562DB5620C007AB6F2 /* SignUpScreenViewModel.swift in Sources */,
 				13760C452DACA18E007AB6F2 /* AddTransactionScreen.swift in Sources */,
 				134AB9772DAC98340074F462 /* Transaction.swift in Sources */,
@@ -745,6 +752,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 13760C4B2DB479A3007AB6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		13760C612DC85D3F007AB6F2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13760C4B2DB479A3007AB6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
