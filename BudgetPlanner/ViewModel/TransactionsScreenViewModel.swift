@@ -52,4 +52,16 @@ class TransactionsScreenViewModel: ObservableObject {
             showError = true
         }
     }
+    
+    func deleteTransaction(_ transaction: Transaction) async {
+        guard let transactionId = transaction.id else { return }
+        
+        do {
+            try await FirestoreManager.shared.deleteTransaction(transactionId: transactionId)
+            await fetchTransactions()
+        } catch {
+            errorMessage = error.localizedDescription
+            showError = true
+        }
+    }
 }

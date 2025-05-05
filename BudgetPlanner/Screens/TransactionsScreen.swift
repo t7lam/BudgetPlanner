@@ -16,6 +16,15 @@ struct TransactionsScreen: View {
             List {
                 ForEach(viewModel.transactions) { transaction in
                     TransactionCell(transaction: transaction)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                Task {
+                                    await viewModel.deleteTransaction(transaction)
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                 }
                 .listRowSeparator(.hidden)
             }
