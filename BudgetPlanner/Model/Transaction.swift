@@ -6,11 +6,26 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Transaction: Identifiable, Codable {
-    let id: UUID?
-    let date: String
+    @DocumentID var id: String?
+    let user_id: String
+    let date: Date
     let amount: Double
     let category: String
-    let typeOfTransaction: String
+    let type_of_transaction: String
+    let description: String?
+    let created_at: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case user_id
+        case date
+        case amount
+        case category
+        case type_of_transaction
+        case description
+        case created_at
+    }
 }

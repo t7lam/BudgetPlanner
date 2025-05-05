@@ -40,5 +40,5 @@ struct TransactionCell: View {
 }
 
 #Preview {
-    TransactionCell(transaction: Transaction(id: UUID(), date: "Jan. 1st 2025", amount: 101.00, category: "Account", typeOfTransaction: "Expense"))
+    TransactionCell(transaction: Transaction(id: "testId", date: "Jan. 1st 2025", amount: 101.00, category: "Account", typeOfTransaction: "Expense"))
 }

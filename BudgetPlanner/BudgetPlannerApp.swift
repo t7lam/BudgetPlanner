@@ -11,7 +11,7 @@ import FirebaseCore
 @main
 struct BudgetPlannerApp: App {
     @StateObject private var appViewModel = AppViewModel()
-    
+
     init() {
         FirebaseApp.configure()
     }
