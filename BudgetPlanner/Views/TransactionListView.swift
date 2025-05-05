@@ -31,14 +31,14 @@ struct TransactionRow: View {
             VStack(alignment: .leading) {
                 Text(transaction.category)
                     .font(.headline)
-                Text(transaction.date)
+                Text(transaction.date, style: .date)
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
             Spacer()
             Text("$\(transaction.amount, specifier: "%.2f")")
                 .font(.headline)
-                .foregroundColor(transaction.typeOfTransaction == "Expense" ? .red : .green)
+                .foregroundColor(transaction.type_of_transaction == "Expense" ? .red : .green)
         }
         .padding(.vertical, 4)
     }

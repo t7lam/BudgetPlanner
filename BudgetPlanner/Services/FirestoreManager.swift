@@ -43,7 +43,6 @@ class FirestoreManager {
     func getTransactions(userId: String) async throws -> [Transaction] {
         let query = db.collection("transactions")
             .whereField("user_id", isEqualTo: userId)
-            .order(by: "date", descending: true)
         
         let snapshot = try await query.getDocuments()
         return try snapshot.documents.compactMap { document in

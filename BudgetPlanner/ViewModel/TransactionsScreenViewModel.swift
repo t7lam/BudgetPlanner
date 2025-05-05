@@ -7,28 +7,46 @@
 
 import Foundation
 
-import Foundation
-
 @MainActor
 class TransactionsScreenViewModel: ObservableObject {
-    @Published var transactions: [Transaction] = [
-        Transaction(id: UUID(), date: "Jan 1 2025", amount: 101.00, category: "Account", typeOfTransaction: "Expense"),
-        Transaction(id: UUID(), date: "Jan 2 2025", amount: 201.00, category: "Account", typeOfTransaction: "Expense")
-    ]
+    @Published var transactions: [Transaction] = []
+    @Published var errorMessage: String = ""
+    @Published var showError: Bool = false
     
-    func addTransaction(amount: Double, category: String, typeOfTransaction: String, date: Date) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d yyyy"
-        let dateString = dateFormatter.string(from: date)
+    func addTransaction(amount: Double, category: String, typeOfTransaction: String, date: Date) async {
+        guard let userId = AuthManager.shared.currentUser?.uid else { return }
         
         let newTransaction = Transaction(
-            id: UUID(),
-            date: dateString,
+            id: nil, // Firestore will generate this
+            user_id: userId,
+            date: date,
             amount: amount,
             category: category,
-            typeOfTransaction: typeOfTransaction
+            type_of_transaction: typeOfTransaction,
+            description: nil,
+            created_at: Date()
         )
         
-        transactions.append(newTransaction)
+        do {
+            try await FirestoreManager.shared.addTransaction(transaction: newTransaction)
+            await fetchTransactions()
+        } catch {
+            errorMessage = error.localizedDescription
+            showError = true
+        }
+    }
+    
+    func fetchTransactions() async {
+        guard let userId = AuthManager.shared.currentUser?.uid else { return }
+        
+        do {
+            var fetchedTransactions = try await FirestoreManager.shared.getTransactions(userId: userId)
+            // Sort transactions by date in descending order
+            fetchedTransactions.sort { $0.date > $1.date }
+            transactions = fetchedTransactions
+        } catch {
+            errorMessage = error.localizedDescription
+            showError = true
+        }
     }
 }

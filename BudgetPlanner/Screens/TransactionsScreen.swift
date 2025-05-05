@@ -43,6 +43,14 @@ struct TransactionsScreen: View {
             .sheet(isPresented: $showingAddTransaction) {
                 AddTransactionScreen(viewModel: viewModel)
             }
+            .task {
+                await viewModel.fetchTransactions()
+            }
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage)
+            }
         }
     }
 }

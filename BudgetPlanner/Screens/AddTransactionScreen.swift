@@ -14,6 +14,7 @@ struct AddTransactionScreen: View {
     @State private var category: String = ""
     @State private var typeOfTransaction: String = "Expense"
     @State private var date: Date = Date()
+    @State private var description: String = ""
     
     let transactionTypes = ["Expense", "Income"]
     
@@ -41,6 +42,10 @@ struct AddTransactionScreen: View {
                 Section("Date") {
                     DatePicker("Date", selection: $date, displayedComponents: .date)
                 }
+                
+                Section("Description (Optional)") {
+                    TextField("Description", text: $description)
+                }
             }
             .navigationTitle("New Transaction")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,18 +58,24 @@ struct AddTransactionScreen: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
-                        // Save transaction
-                        if let amountDouble = Double(amount) {
-                            viewModel.addTransaction(
-                                amount: amountDouble,
-                                category: category,
-                                typeOfTransaction: typeOfTransaction,
-                                date: date
-                            )
+                        Task {
+                            if let amountDouble = Double(amount) {
+                                await viewModel.addTransaction(
+                                    amount: amountDouble,
+                                    category: category,
+                                    typeOfTransaction: typeOfTransaction,
+                                    date: date
+                                )
+                            }
+                            dismiss()
                         }
-                        dismiss()
                     }
                 }
+            }
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage)
             }
         }
     }
